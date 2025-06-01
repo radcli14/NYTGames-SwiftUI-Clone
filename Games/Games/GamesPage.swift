@@ -10,19 +10,46 @@ import SwiftUI
 struct GamesPage: View {
     var body: some View {
         NavigationStack {
-            Text("Work in progress")
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        header
-                    }
+            ScrollView {
+                VStack {
+                    /* Games content will go here */
                 }
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal, content: header)
+                ToolbarItem(placement: .navigationBarTrailing, content: settingsButton)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.background)
+            .toolbarBackgroundVisibility(.visible, for: .navigationBar)
         }
     }
     
-    var header: some View {
-        Text("Games")
-            .font(.custom("Georgia", size: 34, relativeTo: .largeTitle))
-            .fontWeight(.bold)
+    // MARK: - Toolbar
+    
+    func header() -> some View {
+        HStack(spacing: 0) {
+            Image(.dc)
+                .resizable()
+                .frame(width: Constants.headerFontSize, height: Constants.headerFontSize)
+            Rectangle()
+                .frame(width: 1, height: 24)
+                .padding(.horizontal, 2)
+            Text("Games")
+        }
+        .font(.custom("Times", size: Constants.headerFontSize, relativeTo: .title))
+        .fontWeight(.black)
+    }
+    
+    func settingsButton() -> some View {
+        Button("Settings", systemImage: "gearshape.fill") { }
+            .tint(.primary)
+    }
+    
+    // MARK: - Constants
+    
+    private struct Constants {
+        static let headerFontSize: CGFloat = 34
     }
 }
 
