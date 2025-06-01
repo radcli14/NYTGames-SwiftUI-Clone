@@ -1,5 +1,5 @@
 # NYTGames-SwiftUI-Clone
-Cloning the NYT Games UI using SwiftUI
+Imitating the NYT Games UI using SwiftUI
 
 ## Cloning
 
@@ -28,22 +28,24 @@ struct ContentView: View {
 
 - NYT is proprietary, can't use it.
 - Requested ChatGPT to provide a simplified version of my [DC-Engineer.com](https://www.dc-engineer.com/) logo.
-- Removed background in Preview using Instant Alpha, then scaled down to 48x48 and 72x72 for image assets in the app.
-- Create new image set in the app `Assets`, titled "dc," which I can then access as `Image(.dc)` in SwiftUI.
-  
+
 ![DC-Engineer Games App Icon](Assets/dcGamesBW.PNG)
+
+- Removed background in Preview using Instant Alpha, then scaled down to 48x48 and 72x72 for image assets in the app.
+- Create new image set in the app `Assets`, titled "dc," selecte "Render As: Template" in the inspector on the right hand side, now can access as `Image(.dc)` in SwiftUI.
+
+![Icon Template](Tutorial/iconTemplate.png)
 
 - Create a new header view as a function inside the `GamesPage` view class.
 
 ```swift
 func header() -> some View {
-    HStack(spacing: 0) {
+    HStack(spacing: 4) {
         Image(.dc)
             .resizable()
             .frame(width: Constants.headerFontSize, height: Constants.headerFontSize)
         Rectangle()
-            .frame(width: 1, height: 24)
-            .padding(.horizontal, 2)
+            .frame(width: 0.5, height: 28)
         Text("Games")
     }
     .font(.custom("Times", size: Constants.headerFontSize, relativeTo: .title))
@@ -94,3 +96,47 @@ var body: some View {
     }
 }
 ```
+
+- NYT uses a custom version of a Cheltenham font for their header, I downloaded a [free version](https://www.cdnfonts.com/itc-cheltenham-std.font) that doesn't exactly match it, but I thought I'd demo the process with it anyway.
+- Follow along with [Apple's guidance](https://developer.apple.com/documentation/swiftui/applying-custom-fonts-to-text/).
+- In the app, I right clicked on my app on the left side and selected "New Folder," which I titled "Fonts".
+- Then I right clicked on the Fonts folder and selected "Add Files," then navigated to a file I downloaded titled `CheltenhamStdBold.otf`.
+- When adding it, make sure your app target is selected, which it should be by default.
+
+![Add Font File](Tutorial/addFontFile.png)
+
+- To use the custom font in the app, you must create a "Fonts provided by application" field in the info tab
+
+![Add Font Info (1)](Tutorial/addFontInfo1.png)
+
+- The value should be  `CheltenhamStdBold.otf`.
+- Confusingly, not `Fonts/CheltenhamStdBold.otf` as the Apple documentation would suggest, this would result in "File not found" errors, iOS appears to flatten the directory structure at build time, so you don't include the subfolder.
+
+![Add Font Info (2)](Tutorial/addFontInfo2.png)
+
+- In this particular font, accessing it in SwiftUI was not simply its file name, rather, I needed to determine its PostScript name.
+- You can determine the Postscript name by adding the `.otf` file as a system font in the FontBook app, which is usually the default if you double click it in Finder.
+
+![Check Font PostScript Name](Tutorial/addFontBook.png)
+
+- The modified code that accesses this font is below.
+- Note the padding modifier that I added to the games text, which I don't like, but I needed to properly align the custom font with the other content.
+
+```swift
+func header() -> some View {
+    HStack(spacing: 4) {
+        Image(.dc)
+            .resizable()
+            .frame(width: Constants.headerFontSize, height: Constants.headerFontSize)
+        Rectangle()
+            .frame(width: 0.5, height: 28)
+        Text("Games")
+            .padding(.top, 12)
+    }
+    .font(.custom("CheltenhamStd-Bold", size: Constants.headerFontSize, relativeTo: .title))
+}
+```
+
+- The completed header, imitating the NYT games style, is shown below.
+
+![Completed Games Header](Tutorial/gamesHeader.jpg)
