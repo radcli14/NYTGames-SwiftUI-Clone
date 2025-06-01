@@ -28,17 +28,16 @@ struct GamesPage: View {
     // MARK: - Toolbar
     
     func header() -> some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 4) {
             Image(.dc)
                 .resizable()
                 .frame(width: Constants.headerFontSize, height: Constants.headerFontSize)
             Rectangle()
-                .frame(width: 1, height: 24)
-                .padding(.horizontal, 2)
+                .frame(width: 0.5, height: 28)
             Text("Games")
+                .padding(.top, 12)
         }
-        .font(.custom("Times", size: Constants.headerFontSize, relativeTo: .title))
-        .fontWeight(.black)
+        .font(.custom("CheltenhamStd-Bold", size: Constants.headerFontSize, relativeTo: .title))
     }
     
     func settingsButton() -> some View {
