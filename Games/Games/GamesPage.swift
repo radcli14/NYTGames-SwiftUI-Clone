@@ -8,15 +8,32 @@
 import SwiftUI
 
 struct GamesPage: View {
+    let fontList = [
+        "Times", "Georgia", "Palatino", "Charter", "American Typewriter Bold",
+        "Baskerville Bold", "Bodoni 72 Oldstyle Book", "Charter Black", "Cochin Bold",
+        "Didot Bold", "Hoefler Text Black", "Kailasa Bold", "Rockwell Bold",
+        "Times New Roman Bold", "Optima Bold", "Rockwell Bold", "STIX Two Text Bold",
+        "Trebuchet MS Bold", "Verdana Bold"
+    ]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    /* Games content will go here */
+                    ForEach(fontList.sorted(), id: \.self) { font in
+                        Text(font)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.top)
+                        header(font: font)
+                        Divider()
+                    }
                 }
+                .frame(maxWidth: .infinity)
             }
+            .background(.ultraThinMaterial)
             .toolbar {
-                ToolbarItem(placement: .principal, content: header)
+                ToolbarItem(placement: .principal, content: { header(topPadding: 12) })
                 ToolbarItem(placement: .navigationBarTrailing, content: settingsButton)
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -27,7 +44,7 @@ struct GamesPage: View {
     
     // MARK: - Toolbar
     
-    func header() -> some View {
+    func header(font: String = "CheltenhamStd-Bold", topPadding: CGFloat = 0) -> some View {
         HStack(spacing: 4) {
             Image(.dc)
                 .resizable()
@@ -35,9 +52,10 @@ struct GamesPage: View {
             Rectangle()
                 .frame(width: 0.5, height: 28)
             Text("Games")
-                .padding(.top, 12)
+                .padding(.top, topPadding)
+                .fontWeight(.black)
         }
-        .font(.custom("CheltenhamStd-Bold", size: Constants.headerFontSize, relativeTo: .title))
+        .font(.custom(font, size: Constants.headerFontSize, relativeTo: .title))
     }
     
     func settingsButton() -> some View {
