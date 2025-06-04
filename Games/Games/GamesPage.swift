@@ -8,27 +8,18 @@
 import SwiftUI
 
 struct GamesPage: View {
-    let fontList = [
-        "Times", "Georgia", "Palatino", "Charter", "American Typewriter Bold",
-        "Baskerville Bold", "Bodoni 72 Oldstyle Book", "Charter Black", "Cochin Bold",
-        "Didot Bold", "Hoefler Text Black", "Kailasa Bold", "Rockwell Bold",
-        "Times New Roman Bold", "Optima Bold", "Rockwell Bold", "STIX Two Text Bold",
-        "Trebuchet MS Bold", "Verdana Bold"
-    ]
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    ForEach(fontList.sorted(), id: \.self) { font in
-                        Text(font)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.top)
-                        header(font: font)
-                        Divider()
-                    }
+                VStack(spacing: 36) {
+                    GameTileView<Color>.crossword
+                    GameTileView<Color>.spellingBee
+                    GameTileView<Color>.wordle
+                    GameTileView<Color>.connections
+                    GameTileView<Color>.theMini
                 }
+                .padding()
                 .frame(maxWidth: .infinity)
             }
             .background(.ultraThinMaterial)

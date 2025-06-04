@@ -144,3 +144,84 @@ HStack {
 ```
 
 ![Text Formatting](Tutorial/tileFormatted.png)
+
+### Adding to the `GamesPage`
+
+- Create a set of presets representing each of the games that use the large tile format
+
+```swift
+extension GameTileView {
+    
+    // MARK: - Presets
+    
+    static var crossword: some View {
+        GameTileView<Color>(
+            title: "The Crossword",
+            caption: "Subscribe to unlock daily puzzles and the archive.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .blue,
+            icon: { Color.black }
+        )
+    }
+    
+    static var spellingBee: some View {
+        GameTileView<Color>(
+            title: "Spelling Bee",
+            caption: "Make as many words as you can with 7 letters.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .yellow,
+            icon: { Color.orange }
+        )
+    }
+    
+    static var wordle: some View {
+        GameTileView<Color>(
+            title: "Wordle",
+            caption: "Guess your way to the correct word.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .gray,
+            icon: { Color.green }
+        )
+    }
+    
+    static var connections: some View {
+        GameTileView<Color>(
+            title: "Connections",
+            caption: "Group words that share a common thread.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .purple,
+            icon: { Color.pink }
+        )
+    }
+    
+    static var theMini: some View {
+        GameTileView<Color>(
+            title: "The Mini",
+            caption: "Solve the puzzle in seconds.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .teal,
+            icon: { Color.blue }
+        )
+    }
+}
+```
+
+- In `GamesPage.swift`, replace the content in the primary `VStack` with the set of presets
+
+```swift
+VStack(spacing: 36) {
+    GameTileView<Color>.crossword
+    GameTileView<Color>.spellingBee
+    GameTileView<Color>.wordle
+    GameTileView<Color>.connections
+    GameTileView<Color>.theMini
+}
+.padding()
+```
+
+![Tile Stack](Tutorial/tileStack.png)

@@ -53,20 +53,72 @@ struct GameTileView<GameIcon: View>: View {
     // MARK: - Constants
     
     private let paddingWidth: CGFloat = 24
-    private let tileHeight: CGFloat = 164
+    private let tileHeight: CGFloat = 180
     private let tileCornerRadius: CGFloat = 16
     private let iconSize: CGFloat = 72
     private let iconCornerRadius: CGFloat = 8
 }
 
+extension GameTileView {
+    
+    // MARK: - Presets
+
+    static var crossword: some View {
+        GameTileView<Color>(
+            title: "The Crossword",
+            caption: "Subscribe to unlock daily puzzles and the archive.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .blue,
+            icon: { Color.black }
+        )
+    }
+    
+    static var spellingBee: some View {
+        GameTileView<Color>(
+            title: "Spelling Bee",
+            caption: "Make as many words as you can with 7 letters.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .yellow,
+            icon: { Color.orange }
+        )
+    }
+    
+    static var wordle: some View {
+        GameTileView<Color>(
+            title: "Wordle",
+            caption: "Guess your way to the correct word.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .gray,
+            icon: { Color.green }
+        )
+    }
+    
+    static var connections: some View {
+        GameTileView<Color>(
+            title: "Connections",
+            caption: "Group words that share a common thread.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .purple,
+            icon: { Color.pink }
+        )
+    }
+    
+    static var theMini: some View {
+        GameTileView<Color>(
+            title: "The Mini",
+            caption: "Solve the puzzle in seconds.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .teal,
+            icon: { Color.blue }
+        )
+    }
+}
+
 #Preview {
-    GameTileView(
-        title: "The Crossword",
-        caption: "Subscribe to unlock daily puzzles and the archive.",
-        date: .now,
-        author: "Eliott Radcliffe",
-        background: .blue,
-        icon: { Color.black }
-    )
-    .padding()
+    GameTileView<Color>.crossword.padding()
 }
