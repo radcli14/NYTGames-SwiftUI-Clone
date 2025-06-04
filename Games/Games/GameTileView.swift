@@ -23,14 +23,28 @@ struct GameTileView<GameIcon: View>: View {
                     Text(caption)
                 }
                 icon()
+                    .frame(width: iconSize, height: iconSize)
+                    .clipShape(.rect(cornerRadius: iconCornerRadius))
             }
+            Spacer()
             HStack {
                 Text(date.formatted())
                 Text(author)
             }
         }
-        .background(background)
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: tileHeight)
+        .background {
+            RoundedRectangle(cornerRadius: tileCornerRadius).fill(background)
+        }
     }
+    
+    // MARK: - Constants
+    
+    private let tileHeight: CGFloat = 164
+    private let tileCornerRadius: CGFloat = 16
+    private let iconSize: CGFloat = 72
+    private let iconCornerRadius: CGFloat = 8
 }
 
 #Preview {
@@ -42,4 +56,5 @@ struct GameTileView<GameIcon: View>: View {
         background: .blue,
         icon: { Color.black }
     )
+    .padding()
 }

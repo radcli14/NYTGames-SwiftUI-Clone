@@ -10,6 +10,8 @@ Read more [on the blog](https://www.dc-engineer.com/imitating-nyt-games-with-swi
 ## Post 2: Game Tiles
 Post on the blog is upcoming, stay tuned
 
+### Create the File and Placeholders
+
 - New -> File From Template -> SwiftUI View, name it "GameTileView"
 - Start with a large tile, which include:
   * Title `Text` in the upper left, using the custom Cheltenham font
@@ -66,3 +68,42 @@ VStack {
 .background(background)
 ```
 
+- This won't look much like the actual tile just yet, but you can see the items 
+
+![Initial Tile Structure](Tutorial/tileInitial.png)
+
+### Add Frames, Padding, and Rounded Corners
+
+- We want to restrict the height of the tile, and the size of the icon, add dimensions as constants at the bottom of the `GameTileView` (ballpark)
+
+```swift
+// MARK: - Constants
+
+private let tileHeight: CGFloat = 164
+private let tileCornerRadius: CGFloat = 16
+private let iconSize: CGFloat = 72
+private let iconCornerRadius: CGFloat = 8
+```
+
+- Below the main `VStack`, where we previously attached the `.background(background)` modifier
+
+```swift
+VStack {
+    /* other view components */
+}
+.padding()
+.frame(maxWidth: .infinity, maxHeight: tileHeight)
+.background {
+    RoundedRectangle(cornerRadius: tileCornerRadius).fill(background)
+}
+```
+
+- Attach frame and clip modifiers to the icon
+
+```swift
+icon()
+    .frame(width: iconSize, height: iconSize)
+    .clipShape(.rect(cornerRadius: iconCornerRadius))
+```
+
+![Tile After Framing](Tutorial/tileFramed.png)
