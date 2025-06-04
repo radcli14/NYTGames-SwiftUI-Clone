@@ -12,13 +12,34 @@ struct GameTileView<GameIcon: View>: View {
     let caption: String
     let date: Date
     let author: String
+    let background: Color
     let icon: () -> GameIcon
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                VStack {
+                    Text(title)
+                    Text(caption)
+                }
+                icon()
+            }
+            HStack {
+                Text(date.formatted())
+                Text(author)
+            }
+        }
+        .background(background)
     }
 }
 
 #Preview {
-    GameTileView(title: "", caption: "", date: Date(), author: "", icon: { Text("") })
+    GameTileView(
+        title: "The Crossword",
+        caption: "Subscribe to unlock daily puzzles and the archive.",
+        date: .now,
+        author: "Eliott Radcliffe",
+        background: .blue,
+        icon: { Color.black }
+    )
 }

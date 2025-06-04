@@ -14,9 +14,12 @@ Post on the blog is upcoming, stay tuned
 - Start with a large tile, which include:
   * Title `Text` in the upper left, using the custom Cheltenham font
   * Caption `Text` underneath the title, in smaller secondary text
-  * Icon `View` on the right
   * Date as formatted `Text` on the lower left, in a bolded sans font
   * Author name `Text` as in the lower right, as capitalized secondary text
+  * Background `Color`
+  * Icon `View` on the right
+- Create the constants at the top of the view structure, including defining the `GameIcon` as a generic view
+- Also add placeholders in the preview
 
 ```swift
 struct GameTileView<GameIcon: View>: View {
@@ -24,6 +27,7 @@ struct GameTileView<GameIcon: View>: View {
     let caption: String
     let date: Date
     let author: String
+    let background: Color
     let icon: () -> GameIcon
     
     var body: some View {
@@ -32,6 +36,33 @@ struct GameTileView<GameIcon: View>: View {
 }
 
 #Preview {
-    GameTileView(title: "", caption: "", date: Date(), author: "", icon: { Text("") })
+    GameTileView(
+        title: "The Crossword",
+        caption: "Subscribe to unlock daily puzzles and the archive.",
+        date: .now,
+        author: "Eliott Radcliffe",
+        background: .blue,
+        icon: { Color.black }
+    )
 }
 ```
+
+- Inside the `body` of our view, we can build up the view scaffold
+
+```swift
+VStack {
+    HStack {
+        VStack {
+            Text(title)
+            Text(caption)
+        }
+        icon()
+    }
+    HStack {
+        Text(date.formatted())
+        Text(author)
+    }
+}
+.background(background)
+```
+
