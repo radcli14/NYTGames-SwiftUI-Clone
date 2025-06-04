@@ -79,6 +79,7 @@ VStack {
 ```swift
 // MARK: - Constants
 
+private let paddingWidth: CGFloat = 24
 private let tileHeight: CGFloat = 164
 private let tileCornerRadius: CGFloat = 16
 private let iconSize: CGFloat = 72
@@ -91,19 +92,55 @@ private let iconCornerRadius: CGFloat = 8
 VStack {
     /* other view components */
 }
-.padding()
+.padding(paddingWidth)
 .frame(maxWidth: .infinity, maxHeight: tileHeight)
 .background {
     RoundedRectangle(cornerRadius: tileCornerRadius).fill(background)
 }
 ```
 
-- Attach frame and clip modifiers to the icon
+- Attach frame, clip, and padding modifiers to the icon
 
 ```swift
 icon()
     .frame(width: iconSize, height: iconSize)
     .clipShape(.rect(cornerRadius: iconCornerRadius))
+    .padding(.leading, paddingWidth)
 ```
 
 ![Tile After Framing](Tutorial/tileFramed.png)
+
+### Fonts and Formatting
+
+- Attach font and color modifiers to the caption text
+- Fixed size modifier ensures proper wrapping of the caption
+
+```swift
+VStack(alignment: .leading) {
+    Text(title)
+        .font(.custom("CheltenhamStd-Bold", size: 22, relativeTo: .title2))
+    Text(caption)
+        .font(.subheadline)
+        .foregroundColor(.secondary)
+}
+.fixedSize(horizontal: false, vertical: true)
+```
+
+- Then modify the date format modifier, add the "By " string in front of the author name, which is uppercased, and add font modifiers
+- Include a spacer to push the date and author to the edges of the HStack
+- The two author `Text` views are added together, and placed inside a parantheses so we can give them the same modifiers
+- Once again, fixedSize modifier ensures proper wrapping
+
+```swift
+HStack {
+    Text(date.formatted(.dateTime.weekday(.wide).month(.abbreviated).day()))
+        .font(.headline)
+    Spacer()
+    ( Text("By ") + Text(author.uppercased()) )
+        .font(.footnote)
+        .foregroundColor(.secondary)
+}
+.fixedSize(horizontal: false, vertical: true)
+```
+
+![Text Formatting](Tutorial/tileFormatted.png)

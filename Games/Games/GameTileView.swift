@@ -18,21 +18,32 @@ struct GameTileView<GameIcon: View>: View {
     var body: some View {
         VStack {
             HStack {
-                VStack {
+                VStack(alignment: .leading) {
                     Text(title)
+                        .font(.custom("CheltenhamStd-Bold", size: 22, relativeTo: .title2))
                     Text(caption)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
                 }
+                .fixedSize(horizontal: false, vertical: true)
+                Spacer()
                 icon()
                     .frame(width: iconSize, height: iconSize)
                     .clipShape(.rect(cornerRadius: iconCornerRadius))
+                    .padding(.leading, paddingWidth)
             }
             Spacer()
             HStack {
-                Text(date.formatted())
-                Text(author)
+                Text(date.formatted(.dateTime.weekday(.wide).month(.abbreviated).day()))
+                    .font(.headline)
+                Spacer()
+                ( Text("By ") + Text(author.uppercased()) )
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
             }
+            .fixedSize(horizontal: false, vertical: true)
         }
-        .padding()
+        .padding(paddingWidth)
         .frame(maxWidth: .infinity, maxHeight: tileHeight)
         .background {
             RoundedRectangle(cornerRadius: tileCornerRadius).fill(background)
@@ -41,6 +52,7 @@ struct GameTileView<GameIcon: View>: View {
     
     // MARK: - Constants
     
+    private let paddingWidth: CGFloat = 24
     private let tileHeight: CGFloat = 164
     private let tileCornerRadius: CGFloat = 16
     private let iconSize: CGFloat = 72
