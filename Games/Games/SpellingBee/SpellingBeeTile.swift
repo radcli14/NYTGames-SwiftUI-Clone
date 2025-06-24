@@ -9,7 +9,14 @@ import SwiftUI
 
 struct SpellingBeeTile: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GameTileView(
+            title: "Spelling Bee",
+            caption: "Make as many words as you can with 7 letters.",
+            date: .now,
+            author: "Eliott Radcliffe",
+            background: .spellingbeeYellow,
+            icon: SpellingBeeIcon.init
+        )
     }
 }
 

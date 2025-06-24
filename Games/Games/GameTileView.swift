@@ -59,22 +59,12 @@ struct GameTileView<GameIcon: View>: View {
     private let iconCornerRadius: CGFloat = 8
 }
 
-extension GameTileView {
-    
-    // MARK: - Presets
-    
-    static var spellingBee: some View {
-        GameTileView<Color>(
-            title: "Spelling Bee",
-            caption: "Make as many words as you can with 7 letters.",
-            date: .now,
-            author: "Eliott Radcliffe",
-            background: .spellingbeeYellow,
-            icon: { Color.spellingbeeOrange }
-        )
-    }
-}
-
 #Preview {
-    GameTileView<Color>.spellingBee.padding()
+    GameTileView(
+        title: "Test Tile",
+        caption: "This is an example",
+        date: .now,
+        author: "Eliott Radcliffe",
+        background: .tilesGreen,
+        icon: { Color.secondary })
 }

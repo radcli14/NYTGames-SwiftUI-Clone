@@ -16,10 +16,10 @@ struct GridIcon: View {
             horizontalSpacing: lineWidth,
             verticalSpacing: lineWidth
         ) {
-            ForEach(tileColors, id: \.self) { row in
+            ForEach(tileColors.indices, id: \.self) { i in
                 GridRow {
-                    ForEach(row, id: \.self) { tileColor in
-                        tileColor
+                    ForEach(tileColors[i].indices, id: \.self) { j in
+                        tileColors[i][j]
                     }
                 }
             }

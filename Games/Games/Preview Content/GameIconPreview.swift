@@ -18,10 +18,15 @@ struct GameIconPreview<GameIcon: View>: View {
 }
 
 #Preview {
-    HStack {
-        GameIconPreview(icon: CrosswordIcon.init)
-        GameIconPreview(icon: ConnectionsIcon.init)
-        GameIconPreview(icon: WordleIcon.init)
-        GameIconPreview(icon: TheMiniIcon.init)
+    VStack {
+        HStack {
+            GameIconPreview(icon: CrosswordIcon.init)
+            GameIconPreview(icon: SpellingBeeIcon.init)
+            GameIconPreview(icon: ConnectionsIcon.init)
+        }
+        HStack {
+            GameIconPreview(icon: WordleIcon.init)
+            GameIconPreview(icon: TheMiniIcon.init)
+        }
     }
 }

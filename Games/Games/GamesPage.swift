@@ -14,7 +14,7 @@ struct GamesPage: View {
             ScrollView {
                 VStack(spacing: 36) {
                     CrosswordTile()
-                    GameTileView<Color>.spellingBee
+                    SpellingBeeTile()
                     WordleTile()
                     ConnectionsTile()
                     TheMiniTile()
