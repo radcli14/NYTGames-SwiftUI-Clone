@@ -38,7 +38,9 @@ Read more [on the blog](https://www.dc-engineer.com/imitating-nyt-games-with-swi
 | `spellingbeeYellow` | `F2DB50`  |
 | `spellingbeeOrange` | `F1CF48`  |
 | `wordleGray`        | `D4D6DA`  |
-| `wordleGreen`       | `4B7C3C`  |
+| `wordleYellow`      | `CCB14E`  |
+| `wordleGreen`       | `79A86B`  |
+| `wordleGreenVar`    | `4B7C3C`  |
 | `connectionsPurple` | `AFA7F3`  |
 | `connectionsViolet` | `B174BF`  |
 | `strandsTeal`       | `BBDDD8`  |
@@ -157,21 +159,22 @@ struct GameIconPreview<GameIcon: View>: View {
 import SwiftUI
 
 struct CrosswordIcon: View {
-    var tileColors: [[Color]] = [
+    private let tileColors: [[Color]] = [
         [.white, .white, .black],
         [.white, .black, .white],
         [.black, .white, .white]
     ]
+    private let lineWidth: CGFloat = 4
     
     var body: some View {
         Grid(
             horizontalSpacing: lineWidth,
             verticalSpacing: lineWidth
         ) {
-            ForEach(0..<3) { i in
+            ForEach(tileColors, id: \.self) { row in
                 GridRow {
-                    ForEach(0..<3) { j in
-                        tileColors[i][j]
+                    ForEach(row, id: \.self) { tileColor in
+                        tileColor
                     }
                 }
             }
@@ -184,8 +187,6 @@ struct CrosswordIcon: View {
                 .stroke(lineWidth: 2 * lineWidth)
         }
     }
-    
-    private let lineWidth: CGFloat = 4
 }
 
 #Preview {
@@ -225,4 +226,83 @@ struct CrosswordTile: View {
 - Result:
 
 ![Crossword with Icon](Tutorial/crosswordWithIcon.png)
+
+### Create the Other Grid-like Icons
+
+- Wordle, Connections, and The Mini all share similar icon styles
+- In fact, we can build them all through a common function, create a new file at the top level called `GridIcon.swift`, paste the body code directly from `CrosswordIcon`
+
+```swift
+import SwiftUI
+
+struct GridIcon: View {
+    let tileColors: [[Color]]
+    var lineWidth: CGFloat = 4
+    
+    var body: some View {
+        /* body unchanged from CrosswordIcon */
+    }
+}
+```
+
+- Since we based this function off of `CrosswordIcon` in the first place, we can replace its entire body with `GridIcon(tileColors: tileColors)`, with the `tileColors` argument retained from the previous private variable.
+- Similar to as we did with Crossword, create feature folders for Spelling Bee (to be created later), Wordle, Connections, and The Mini, each containing icon and tile SwiftUI files (i.e. `SpellingBeeIcon` and `SpellingBeeTile`, `WordleIcon` and `WordleTile`,  `ConnectionsIcon` and `ConnectionsTile`, `TheMiniIcon` and `TheMiniTile`).
+
+<img width="272" alt="image" src="https://github.com/user-attachments/assets/979ab7f6-a867-4c57-a816-3e72bfd071f5" />
+
+- Now, we can create all the grid-like icons, all following essentially the same format, but with different tile colors.
+
+```swift
+struct WordleIcon: View {
+    private let tileColors: [[Color]] = [
+        [.white, .white, .white],
+        [.white, .wordleYellow, .wordleGreen],
+        [.wordleGreen, .wordleGreen, .wordleGreen]
+    ]
+    
+    var body: some View {
+        GridIcon(tileColors: tileColors)
+    }
+}
+
+struct ConnectionsIcon: View {
+    private let tileColors: [[Color]] = [
+        [.connectionsViolet, .connectionsViolet, .white, .connectionsViolet],
+        [.connectionsViolet, .connectionsViolet, .connectionsViolet, .white],
+        [.connectionsViolet, .white, .connectionsViolet, .connectionsViolet],
+        [.white, .connectionsViolet, .connectionsViolet, .connectionsViolet]
+    ]
+    
+    var body: some View {
+        GridIcon(tileColors: tileColors)
+    }
+}
+
+struct TheMiniIcon: View {
+    private let tileColors: [[Color]] = [
+        [.black, .white],
+        [.white, .white]
+    ]
+    
+    var body: some View {
+        GridIcon(tileColors: tileColors)
+    }
+}
+```
+
+- Can configure the preview for or `GameIconPreview` to display each of these
+```swift
+#Preview {
+    HStack {
+        GameIconPreview(icon: CrosswordIcon.init)
+        GameIconPreview(icon: ConnectionsIcon.init)
+        GameIconPreview(icon: WordleIcon.init)
+        GameIconPreview(icon: TheMiniIcon.init)
+    }
+}
+```
+
+<img width="168" alt="image" src="https://github.com/user-attachments/assets/545c4a9f-742f-40b0-940d-daf2c4dd35ed" />
+
+- Very close, but now we have extra black boundaries between the violet squares in the Connections icon
 
