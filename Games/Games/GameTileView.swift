@@ -35,7 +35,7 @@ struct GameTileView<GameIcon: View>: View {
             Spacer()
             HStack {
                 Text(date.formatted(.dateTime.weekday(.wide).month(.abbreviated).day()))
-                    .font(.headline)
+                    .font(.subheadline)
                 Spacer()
                 ( Text("By ") + Text(author.uppercased()) )
                     .font(.footnote)
@@ -44,7 +44,7 @@ struct GameTileView<GameIcon: View>: View {
             .fixedSize(horizontal: false, vertical: true)
         }
         .padding(paddingWidth)
-        .frame(maxWidth: .infinity, maxHeight: tileHeight)
+        .frame(width: tileWidth, height: tileHeight)
         .background {
             RoundedRectangle(cornerRadius: tileCornerRadius).fill(background)
         }
@@ -53,16 +53,17 @@ struct GameTileView<GameIcon: View>: View {
     // MARK: - Constants
     
     private let paddingWidth: CGFloat = 24
-    private let tileHeight: CGFloat = 180
+    private let tileWidth: CGFloat = 340
+    private let tileHeight: CGFloat = 170
     private let tileCornerRadius: CGFloat = 16
-    private let iconSize: CGFloat = 72
+    private let iconSize: CGFloat = 64
     private let iconCornerRadius: CGFloat = 8
 }
 
 #Preview {
     GameTileView(
         title: "Test Tile",
-        caption: "This is an example",
+        caption: "This is an example of a game tile like in NYT Games",
         date: .now,
         author: "Eliott Radcliffe",
         background: .tilesGreen,
