@@ -69,7 +69,7 @@ extension GameTileView {
             caption: "Subscribe to unlock daily puzzles and the archive.",
             date: .now,
             author: "Eliott Radcliffe",
-            background: .blue,
+            background: .crossWordBlue,
             icon: { Color.black }
         )
     }
@@ -80,8 +80,8 @@ extension GameTileView {
             caption: "Make as many words as you can with 7 letters.",
             date: .now,
             author: "Eliott Radcliffe",
-            background: .yellow,
-            icon: { Color.orange }
+            background: .spellingbeeYellow,
+            icon: { Color.spellingbeeOrange }
         )
     }
     
@@ -91,8 +91,8 @@ extension GameTileView {
             caption: "Guess your way to the correct word.",
             date: .now,
             author: "Eliott Radcliffe",
-            background: .gray,
-            icon: { Color.green }
+            background: .wordleGray,
+            icon: { Color.wordleGreen }
         )
     }
     
@@ -102,8 +102,8 @@ extension GameTileView {
             caption: "Group words that share a common thread.",
             date: .now,
             author: "Eliott Radcliffe",
-            background: .purple,
-            icon: { Color.pink }
+            background: .connectionsPurple,
+            icon: { Color.connectionsViolet }
         )
     }
     
@@ -113,8 +113,8 @@ extension GameTileView {
             caption: "Solve the puzzle in seconds.",
             date: .now,
             author: "Eliott Radcliffe",
-            background: .teal,
-            icon: { Color.blue }
+            background: .miniBlue,
+            icon: { Color.miniBlueVar }
         )
     }
 }
