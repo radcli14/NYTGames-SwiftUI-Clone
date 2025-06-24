@@ -13,7 +13,7 @@ struct GamesPage: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 36) {
-                    GameTileView<Color>.crossword
+                    CrosswordTile()
                     GameTileView<Color>.spellingBee
                     GameTileView<Color>.wordle
                     GameTileView<Color>.connections

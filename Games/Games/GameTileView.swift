@@ -62,17 +62,6 @@ struct GameTileView<GameIcon: View>: View {
 extension GameTileView {
     
     // MARK: - Presets
-
-    static var crossword: some View {
-        GameTileView<Color>(
-            title: "The Crossword",
-            caption: "Subscribe to unlock daily puzzles and the archive.",
-            date: .now,
-            author: "Eliott Radcliffe",
-            background: .crossWordBlue,
-            icon: { Color.black }
-        )
-    }
     
     static var spellingBee: some View {
         GameTileView<Color>(
@@ -120,5 +109,5 @@ extension GameTileView {
 }
 
 #Preview {
-    GameTileView<Color>.crossword.padding()
+    GameTileView<Color>.spellingBee.padding()
 }
