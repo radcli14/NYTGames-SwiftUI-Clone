@@ -15,9 +15,9 @@ struct GamesPage: View {
                 VStack(spacing: 36) {
                     CrosswordTile()
                     GameTileView<Color>.spellingBee
-                    GameTileView<Color>.wordle
-                    GameTileView<Color>.connections
-                    GameTileView<Color>.theMini
+                    WordleTile()
+                    ConnectionsTile()
+                    TheMiniTile()
                 }
                 .padding()
                 .frame(maxWidth: .infinity)

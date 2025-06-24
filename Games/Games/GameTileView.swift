@@ -73,39 +73,6 @@ extension GameTileView {
             icon: { Color.spellingbeeOrange }
         )
     }
-    
-    static var wordle: some View {
-        GameTileView<Color>(
-            title: "Wordle",
-            caption: "Guess your way to the correct word.",
-            date: .now,
-            author: "Eliott Radcliffe",
-            background: .wordleGray,
-            icon: { Color.wordleGreen }
-        )
-    }
-    
-    static var connections: some View {
-        GameTileView<Color>(
-            title: "Connections",
-            caption: "Group words that share a common thread.",
-            date: .now,
-            author: "Eliott Radcliffe",
-            background: .connectionsPurple,
-            icon: { Color.connectionsViolet }
-        )
-    }
-    
-    static var theMini: some View {
-        GameTileView<Color>(
-            title: "The Mini",
-            caption: "Solve the puzzle in seconds.",
-            date: .now,
-            author: "Eliott Radcliffe",
-            background: .miniBlue,
-            icon: { Color.miniBlueVar }
-        )
-    }
 }
 
 #Preview {
