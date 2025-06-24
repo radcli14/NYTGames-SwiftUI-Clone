@@ -18,5 +18,10 @@ struct GameIconPreview<GameIcon: View>: View {
 }
 
 #Preview {
-    GameIconPreview(icon: { Color.secondary })
+    HStack {
+        GameIconPreview(icon: CrosswordIcon.init)
+        GameIconPreview(icon: ConnectionsIcon.init)
+        GameIconPreview(icon: WordleIcon.init)
+        GameIconPreview(icon: TheMiniIcon.init)
+    }
 }
